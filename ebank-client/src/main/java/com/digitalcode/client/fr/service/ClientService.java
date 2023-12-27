@@ -3,7 +3,6 @@ package com.digitalcode.client.fr.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.digitalcode.client.fr.entity.jpa.Client;
@@ -22,36 +21,29 @@ public class ClientService {
 		return clientRepository.save(client);
 	}
 
-	public Client updateClient(Client clientInput) throws Exception {
-		Optional<Client> result = clientRepository.findById(clientInput.getId());
+	public Client updateClient(Client client) throws Exception {
+		Optional<Client> result = clientRepository.findById(client.getId());
 		if (result.isPresent()) {
-			BeanUtils.copyProperties(clientInput, result.get());
-			return clientRepository.save(result.get());
+			return clientRepository.save(client);
 		} else {
-			throw new Exception("Client Not Exist with Id: "+ clientInput.getId());
+			throw new Exception("Client Not Exist with Id: " + client.getId());
 		}
 	}
 
 	public Client getClientById(Long id) throws Exception {
-		Optional<Client> client = clientRepository.findById(id);
-		if (client.isPresent()) {
-			return client.get();
-		} else {
-			throw new Exception("Client Not Fond with Id: "+ id);
-		}
+		return clientRepository.findById(id).orElseThrow(() -> new Exception("Client Not Fond with Id: " + id));
 	}
-	
-	public void deleteClienttById(Long id) throws Exception{
+
+	public void deleteClienttById(Long id) throws Exception {
 		Optional<Client> client = clientRepository.findById(id);
 		if (client.isPresent()) {
 			clientRepository.deleteById(id);
 		} else {
-			throw new Exception("Client Not Exist with Id: "+ id);
+			throw new Exception("Client Not Exist with Id: " + id);
 		}
 	}
-	
-	public List<Client> findAllClient(){
+
+	public List<Client> findAllClient() {
 		return clientRepository.findAll();
 	}
 }
-

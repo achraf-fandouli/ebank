@@ -1,9 +1,7 @@
 package com.digitalcode.client.fr.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalcode.client.fr.entity.dto.ClientDto;
@@ -53,22 +50,15 @@ public class ClientController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity deleteClienttById(@PathVariable Long id) throws Exception {
-		try {
-			clientService.deleteClienttById(id);
-			return new ResponseEntity<>("Successfully deleted the client with Id: " + id, HttpStatus.CREATED);
-		} catch (NoSuchElementException e) {
-			return new ResponseEntity<>("No client is found !!", HttpStatus.NOT_FOUND);
-		}
+	public ResponseEntity<String> deleteClienttById(@PathVariable Long id) throws Exception {
+		clientService.deleteClienttById(id);
+		return new ResponseEntity<>("Successfully deleted the client with Id: " + id, HttpStatus.CREATED);
 	}
 
 	@GetMapping()
 	public ResponseEntity<List<ClientDto>> findAllClient() {
-		List<Client> clients = clientService.findAllClient();
-		List<ClientDto> response = new ArrayList();
-		for (Client client : clients) {
-			response.add(MapperUtil.convertClientToDto(client));
-		}
+		List<Client> clients = Optional.ofNullable(clientService.findAllClient()).orElse(List.of());
+		List<ClientDto> response = clients.stream().map(client -> MapperUtil.convertClientToDto(client)).toList();
 		return ResponseEntity.ok().body(response);
 	}
 

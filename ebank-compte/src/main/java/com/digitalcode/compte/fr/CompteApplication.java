@@ -1,17 +1,17 @@
-package com.digitalcode.ebank.fr;
+package com.digitalcode.compte.fr;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.context.annotation.ComponentScan;
 
 @EnableDiscoveryClient
-@EnableConfigServer
 @SpringBootApplication
-public class ConfigApplication {
+@ComponentScan(basePackages = "com.digitalcode")
+public class CompteApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ConfigApplication.class, args);
+		SpringApplication.run(CompteApplication.class, args);
 	}
 
 }

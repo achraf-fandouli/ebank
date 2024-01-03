@@ -1,10 +1,10 @@
-package com.digitalcode.ebank.fr;
+package com.digitalcode.compte.fr;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EbankApplicationTests {
+class CompteApplicationTests {
 
 	@Test
 	void contextLoads() {

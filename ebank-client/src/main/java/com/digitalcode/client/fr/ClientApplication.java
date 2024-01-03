@@ -13,7 +13,6 @@ import org.springframework.context.annotation.DependsOn;
 
 import com.digitalcode.exception.GlobalExceptionHandler;
 
-
 @EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan(basePackages = "com.digitalcode")

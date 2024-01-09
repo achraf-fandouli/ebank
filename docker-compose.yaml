@@ -7,6 +7,8 @@ services:
     container_name: registry-container
     ports:
       - "8761:8761"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health" ]
 
   gateway:
     build: ./gateway
@@ -16,8 +18,10 @@ services:
     environment:
       EUREKA_URL: http://registry:8761/eureka/
     depends_on:
-      - registry
-      - config
+      registry:
+        condition: service_healthy
+      config:
+        condition: service_healthy
       
   config:
     build: ./config
@@ -26,8 +30,12 @@ services:
       - "9999:9999"
     environment:
       EUREKA_URL: http://registry:8761/eureka/
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9999/actuator/health" ]
     depends_on:
-      - registry
+      registry:
+        condition: service_healthy
+  
   
   ebank-client:
     build: ./ebank-client
@@ -35,13 +43,12 @@ services:
     ports:
       - "8081:8081"
     environment:
-      CONFIG_URL: optional:configserver:http://config:9999
+      CONFIG_URL: http://config:9999
       EUREKA_URL: http://registry:8761/eureka/
       SPRING_DATASOURCE_URL: jdbc:postgresql://ebank-postgres:5432/ebankdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root
     depends_on:
-      - registry
       - ebank-postgres
       - config
 
@@ -54,3 +61,12 @@ services:
       POSTGRES_DB: ebankdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin-container
+    ports:
+      - "9090:9090"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_LISTEN_PORT: 9090

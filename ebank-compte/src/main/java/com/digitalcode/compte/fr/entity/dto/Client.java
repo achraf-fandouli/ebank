@@ -1,23 +1,23 @@
 package com.digitalcode.compte.fr.entity.dto;
 
-import com.digitalcode.enums.TypeCompte;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompteDto {
-
+@ToString
+public class Client {
+	
 	private Long id;
 
-	private TypeCompte typeCompte;
-
-	private Long clientId;
-
-	private Client client;
+	private String firstName;
+	
+    private String lastName;
+	
+	private String email; 
 }

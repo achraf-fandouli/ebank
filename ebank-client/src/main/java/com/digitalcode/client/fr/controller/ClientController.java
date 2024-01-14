@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalcode.client.fr.entity.dto.ClientDto;
 import com.digitalcode.client.fr.entity.jpa.Client;
+import com.digitalcode.client.fr.mapper.MapperUtil;
 import com.digitalcode.client.fr.service.ClientService;
-import com.digitalcode.client.fr.util.MapperUtil;
 
 @RestController
 @RequestMapping("/clients")

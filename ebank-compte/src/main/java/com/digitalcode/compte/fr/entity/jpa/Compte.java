@@ -1,6 +1,10 @@
 package com.digitalcode.compte.fr.entity.jpa;
 
+import com.digitalcode.enums.TypeCompte;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,5 +27,8 @@ public class Compte {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String typeCompte;
+	@Enumerated(EnumType.STRING)
+	private TypeCompte typeCompte;
+
+	private Long clientId;
 }

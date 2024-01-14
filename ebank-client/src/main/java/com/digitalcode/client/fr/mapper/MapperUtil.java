@@ -1,4 +1,4 @@
-package com.digitalcode.client.fr.util;
+package com.digitalcode.client.fr.mapper;
 
 import org.modelmapper.ModelMapper;
 

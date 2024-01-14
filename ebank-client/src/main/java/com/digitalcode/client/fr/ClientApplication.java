@@ -2,6 +2,7 @@ package com.digitalcode.client.fr;
 
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.DependsOn;
 
+import com.digitalcode.client.fr.entity.jpa.Client;
+import com.digitalcode.client.fr.repository.ClientRepository;
 import com.digitalcode.exception.GlobalExceptionHandler;
 
 @EnableDiscoveryClient
@@ -18,6 +21,9 @@ import com.digitalcode.exception.GlobalExceptionHandler;
 @ComponentScan(basePackages = "com.digitalcode")
 @DependsOn("globalExceptionHandler")
 public class ClientApplication implements CommandLineRunner {
+
+	@Autowired
+	ClientRepository clientRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClientApplication.class, args);
@@ -43,6 +49,9 @@ public class ClientApplication implements CommandLineRunner {
 		for (String beanName : beanNames) {
 			System.out.println(beanName);
 		}
+
+		clientRepository.save(new Client(1L, "salem", "salem", "salem@salem.com"));
+		clientRepository.save(new Client(2L, "rami", "rami", "rami@rami.com"));
 
 	}
 

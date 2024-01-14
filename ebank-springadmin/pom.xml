@@ -10,40 +10,34 @@
 		<version>1.0.0</version>
 	</parent>
 
-	<groupId>com.digitalcode.ebank.fr</groupId>
-	<artifactId>gateway</artifactId>
+
+	<groupId>com.digitalcode.springadmin</groupId>
+	<artifactId>ebank-springadmin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gateway</name>
-	<description>Demo project for Spring Boot</description>
+	<name>ebank-springadmin</name>
+	<description>ebank-springadmin</description>
 	<properties>
 		<java.version>17</java.version>
-		<spring-cloud.version>2022.0.4</spring-cloud.version>
+		<spring-boot-admin.version>3.1.5</spring-boot-admin.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-server</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-gateway</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>${spring-boot-admin.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -55,6 +49,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
+					</image>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

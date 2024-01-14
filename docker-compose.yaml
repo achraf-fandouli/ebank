@@ -35,7 +35,15 @@ services:
     depends_on:
       registry:
         condition: service_healthy
-  
+        
+  springadmin:
+    build: ./ebank-springadmin
+    container_name: springadmin-container
+    ports:
+      - "8089:8089"
+    depends_on:
+      - config
+      - registry  
   
   ebank-client:
     build: ./ebank-client
@@ -45,6 +53,7 @@ services:
     environment:
       CONFIG_URL: http://config:9999
       EUREKA_URL: http://registry:8761/eureka/
+      SPRING_ADMIN_URL: http://springadmin:8089
       SPRING_DATASOURCE_URL: jdbc:postgresql://ebank-postgres:5432/ebankdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root
@@ -52,6 +61,7 @@ services:
       - ebank-postgres
       - registry
       - config
+      - springadmin
       
   ebank-compte:
     build: ./ebank-compte
@@ -61,6 +71,7 @@ services:
     environment:
       CONFIG_URL: http://config:9999
       EUREKA_URL: http://registry:8761/eureka/
+      SPRING_ADMIN_URL: http://springadmin:8089
       SPRING_DATASOURCE_URL: jdbc:postgresql://ebank-postgres:5432/ebankdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root
@@ -68,6 +79,7 @@ services:
       - ebank-postgres
       - registry
       - config
+      - springadmin
 
   ebank-postgres:
     image: postgres:latest

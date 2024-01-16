@@ -32,8 +32,10 @@ public class CompteController {
 	@GetMapping("/{id}")
 	public ResponseEntity<CompteDto> getCompteById(@PathVariable Long id) throws Exception {
 		CompteDto compteDto = MapperUtil.convertCompteToDto(compteService.getCompteById(id));
-		Client client = ebankClientRest.getClientById(compteDto.getClientId());
-		compteDto.setClient(client);
+		if (compteDto.getClientId() != null) {
+			Client client = ebankClientRest.getClientById(compteDto.getClientId());
+			compteDto.setClient(client);
+		}
 		return ResponseEntity.ok().body(compteDto);
 	}
 

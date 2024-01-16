@@ -12,7 +12,6 @@ import org.springframework.context.annotation.DependsOn;
 import com.digitalcode.compte.fr.entity.jpa.Compte;
 import com.digitalcode.compte.fr.repository.CompteRepository;
 import com.digitalcode.enums.TypeCompte;
-import com.google.common.collect.ComparisonChain;
 
 @EnableDiscoveryClient
 @SpringBootApplication
@@ -34,7 +33,5 @@ public class CompteApplication implements CommandLineRunner {
 		compteRepository.save(new Compte(2L, TypeCompte.CURRENT_ACCOUNT, 1L));
 		compteRepository.save(new Compte(3L, TypeCompte.CURRENT_ACCOUNT, 1L));
 		compteRepository.save(new Compte(4L, TypeCompte.CURRENT_ACCOUNT, 2L));
-
 	}
-
 }

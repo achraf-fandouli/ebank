@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "280bfd93-9c61-4dfc-8753-80e760f16bf2",
+		"name": "eBank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19678918",
+		"_collection_link": "https://dark-star-742908.postman.co/workspace/amsRestApi_Project~6423c719-ad9c-4b6a-87a3-b864a7fb80e0/collection/19678918-280bfd93-9c61-4dfc-8753-80e760f16bf2?action=share&source=collection_link&creator=19678918"
+	},
+	"item": [
+		{
+			"name": "getClientById",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "getCompteById",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "getComptes",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "CheckGteway",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "saveClient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/client-service/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"client-service",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateClient",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"firstName\": \"Amjad\",\r\n    \"lastName\": \"Amjad\",\r\n    \"email\": \"Amjad.Amjad@hello.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/client-service/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"client-service",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteClientById",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "findAllClient",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "getServiceConfiguration",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/client-service/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"client-service",
+						"default"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
